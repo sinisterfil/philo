@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 04:14:28 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/05 09:36:13 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/06 19:12:39 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 void overthinking(t_philo *philo)
 {
+	pthread_mutex_lock(philo->write_lock);
     print_message(philo, philo->id, "is thinking");
+	pthread_mutex_unlock(philo->write_lock);
 }
 
 void dreaming(t_philo *philo)
 {
+	pthread_mutex_lock(philo->write_lock);
     print_message(philo, philo->id, "is sleeping");
+	pthread_mutex_lock(philo->write_lock);
 	ft_usleep(philo->time_to_sleep);
+
 }
 
 void feasting(t_philo *philo)

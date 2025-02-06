@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:38:49 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/04 23:30:00 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:05:31 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,7 @@ int	main(int ac, char **av)
     program_init(&program, philo);
 	forks_init(forks, ft_atoi(av[1]));
 	philos_init(philo, &program, forks, av);
+	mother_thread(&program, forks);
+	terminator(&program, forks, NULL);
+	return (0);
 }

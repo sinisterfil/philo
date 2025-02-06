@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:35:04 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/04 23:30:50 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/06 17:38:00 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	philos_init(t_philosophy *program, t_philo *philo, pthread_mutex_t *forks, 
 		i++;
     }
 }
+
 void	forks_init(pthread_mutex_t *forks, int philo_num)
 {
 	int	i;

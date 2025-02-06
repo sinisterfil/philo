@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:36:15 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/05 09:37:35 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:21:52 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_philosphy
 int					ft_strlen(char *str);
 int					ft_atoi(const char *str);
 size_t				get_time(void);
+int					ft_usleep(size_t milliseconds);
 
 // init
 void				program_init(t_philosophy *program, t_philo *philo);
@@ -63,7 +64,6 @@ void				philos_init(t_philosophy *program, t_philo *philo,
 						pthread_mutex_t *forks, char **av);
 
 // threads
-int					ft_usleep(size_t milliseconds);
 int					to_be_or_not_to_be(t_philo *philo);
 void				terminator(t_philosophy *program, pthread_mutex_t *forks,
 						char *arg);

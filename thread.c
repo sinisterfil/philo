@@ -6,21 +6,11 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:42:44 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/05 09:37:47 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:21:13 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_usleep(size_t milliseconds)
-{
-	size_t	clock;
-
-	clock = get_time();
-	while ((get_time() - clock) < milliseconds)
-		usleep(500);
-	return (0);
-}
 
 int	to_be_or_not_to_be(t_philo *philo)
 {
