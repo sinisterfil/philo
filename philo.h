@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:36:15 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/06 16:21:52 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/07 16:51:20 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ typedef struct s_philosphy
 int					ft_strlen(char *str);
 int					ft_atoi(const char *str);
 size_t				get_time(void);
-int					ft_usleep(size_t milliseconds);
+void					ft_usleep(size_t milliseconds);
+void				print_message(t_philo *philo, int id, char *message);
 
 // init
 void				program_init(t_philosophy *program, t_philo *philo);
@@ -64,7 +65,6 @@ void				philos_init(t_philosophy *program, t_philo *philo,
 						pthread_mutex_t *forks, char **av);
 
 // threads
-int					to_be_or_not_to_be(t_philo *philo);
 void				terminator(t_philosophy *program, pthread_mutex_t *forks,
 						char *arg);
 void				*philosophers_dilemma(void *pointer);
@@ -75,5 +75,11 @@ int					mother_thread(t_philosophy *program,
 void				overthinking(t_philo *philo);
 void				dreaming(t_philo *philo);
 void				feasting(t_philo *philo);
+
+// checkup
+int					full_belly(t_philo *philo);
+int					if_dead(t_philo *philo, size_t time_to_die);
+int					anyone_reach_nirvana(t_philo *philo);
+void				*to_be_or_not_to_be(void *pointer);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 04:14:28 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/06 19:12:39 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/07 16:50:49 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 void overthinking(t_philo *philo)
 {
-	pthread_mutex_lock(philo->write_lock);
     print_message(philo, philo->id, "is thinking");
-	pthread_mutex_unlock(philo->write_lock);
 }
 
 void dreaming(t_philo *philo)
 {
-	pthread_mutex_lock(philo->write_lock);
     print_message(philo, philo->id, "is sleeping");
-	pthread_mutex_lock(philo->write_lock);
 	ft_usleep(philo->time_to_sleep);
 
 }
@@ -39,11 +35,11 @@ void feasting(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_lock(philo->left_fork);
-	print_message("has taken a fork", philo, philo->id);
-	philo->eating = 1;
-	print_message("is eating", philo, philo->id);
+	print_message(philo, philo->id, "has taken a fork");
 	pthread_mutex_lock(philo->meal_lock);
-	philo->last_meal = get_current_time();
+	philo->eating = 1;
+	philo->last_meal = get_time();
+	print_message(philo, philo->id, "is eating");
 	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->meal_lock);
 	ft_usleep(philo->time_to_eat);

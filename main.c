@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:38:49 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/06 17:05:31 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/07 17:01:24 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,18 @@ static int	check_av(int ac, char **av)
 	i = 1;
 	if (ft_atoi(av[i]) > MAX_PHILO || ft_atoi(av[i]) <= 0
 		|| check_content(av[i]) == 1)
+	{
 		ft_rules();
+		return (1);
+	}
 	i++;
 	while (i < ac)
 	{
 		if (ft_atoi(av[i]) <= 0 || check_content(av[i]) == 1)
+		{
 			ft_rules();
+			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -79,7 +85,7 @@ int	main(int ac, char **av)
 		return (1);
     program_init(&program, philo);
 	forks_init(forks, ft_atoi(av[1]));
-	philos_init(philo, &program, forks, av);
+	philos_init(&program, philo, forks, av);
 	mother_thread(&program, forks);
 	terminator(&program, forks, NULL);
 	return (0);
