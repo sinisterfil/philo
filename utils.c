@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:40:01 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/07 16:46:16 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/08 16:26:08 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ void	print_message(t_philo *philo, int id, char *message)
 
 	pthread_mutex_lock(philo->write_lock);
 	time = get_time() - philo->start_time;
+	pthread_mutex_lock(philo->dead_lock);
 	if (!(*philo->dead))
 		printf("%zu %d %s\n", time, id, message);
+	pthread_mutex_unlock(philo->dead_lock);
 	pthread_mutex_unlock(philo->write_lock);
 }
 

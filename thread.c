@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:42:44 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/07 16:52:35 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/08 16:23:14 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int	mother_thread(t_philosophy *program, pthread_mutex_t *forks)
 			terminator(program, forks, "Thread join error");
 		i++;
 	}
+	pthread_join(monitor, NULL);
 	return (0);
 }
