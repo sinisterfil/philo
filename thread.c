@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:42:44 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/08 16:23:14 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/03/14 16:38:19 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,21 @@ void	*philosophers_dilemma(void *pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *)pointer;
+	print_message(philo, philo->id, "is thinking");
 	if (philo->id % 2 == 0)
 		ft_usleep(1);
-	while (!(*philo->dead))
+	while (1)
 	{
 		feasting(philo);
 		dreaming(philo);
 		overthinking(philo);
+		pthread_mutex_lock(philo->dead_lock);
+		if ((*philo->dead))
+		{
+			pthread_mutex_unlock(philo->dead_lock);
+			break ;
+		}
+		pthread_mutex_unlock(philo->dead_lock);
 	}
 	return (NULL);
 }
@@ -53,25 +61,25 @@ int	mother_thread(t_philosophy *program, pthread_mutex_t *forks)
 	pthread_t	monitor;
 	int			i;
 
-	if (pthread_create(&monitor, NULL, &to_be_or_not_to_be, program->philo) != 0)
+	if (pthread_create(&monitor, NULL, &to_be_or_not_to_be,
+			program->philo) != 0)
 		terminator(program, forks, "Thread creation error");
 	i = 0;
 	while (i < program->philo[0].num_of_philo)
 	{
 		if (pthread_create(&program->philo[i].thread, NULL,
 				&philosophers_dilemma, &program->philo[i]) != 0)
-			{
-				terminator(program, forks, "Thread creation error");
-				return (1);
-			}
+		{
+			terminator(program, forks, "Thread creation error");
+			return (1);
+		}
 		i++;
 	}
-	i = 0;
-	while (i < program->philo[0].num_of_philo)
+	i = -1;
+	while (++i < program->philo[0].num_of_philo)
 	{
 		if (pthread_join(program->philo[i].thread, NULL) != 0)
 			terminator(program, forks, "Thread join error");
-		i++;
 	}
 	pthread_join(monitor, NULL);
 	return (0);

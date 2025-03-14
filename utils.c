@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:40:01 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/08 16:26:08 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:47:26 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_strlen(char *str)
 
 int	ft_atoi(const char *str)
 {
-	int	i;
+	int			i;
 	long long	result;
 
 	i = 0;
@@ -54,21 +54,21 @@ void	print_message(t_philo *philo, int id, char *message)
 	pthread_mutex_unlock(philo->write_lock);
 }
 
-size_t get_time(void)
+size_t	get_time(void)
 {
 	size_t			current_time;
-	struct timeval	tv;  
+	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);//null saat dilimi 
-	current_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000); //tv_usec son saniyenin içinde geçen mikro saniye
-	return (current_time); //tv_sec 1970ten beri geçen saniye 
+	gettimeofday(&tv, NULL);
+	current_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (current_time);
 }
 
-void	ft_usleep(size_t milliseconds) //usleep mikro saniye alıyor
+void	ft_usleep(size_t milliseconds)
 {
-	size_t	clock;
+	size_t	current;
 
-	clock = get_time();
-	while ((get_time() - clock) < milliseconds)
-		usleep(500); //daha kesin süre beklemek içim
+	current = get_time();
+	while ((get_time() - current) < milliseconds)
+		usleep(500);
 }

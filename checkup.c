@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:12:03 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/07 16:04:24 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:30:51 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	full_belly(t_philo *philo)
 		i++;
 	}
 	if (full == philo[0].num_of_philo)
-    {
-        pthread_mutex_lock(philo[0].dead_lock);
+	{
+		pthread_mutex_lock(philo[0].dead_lock);
 		*philo->dead = 1;
 		pthread_mutex_unlock(philo[0].dead_lock);
 		return (1);
-    }
+	}
 	return (0);
 }
 
@@ -73,9 +73,9 @@ int	anyone_reach_nirvana(t_philo *philo)
 
 void	*to_be_or_not_to_be(void *pointer)
 {
-    t_philo *philo;
+	t_philo	*philo;
 
-    philo = (t_philo *)pointer;
+	philo = (t_philo *)pointer;
 	while (1)
 	{
 		if (anyone_reach_nirvana(philo) == 1 || full_belly(philo) == 1)

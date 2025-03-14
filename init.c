@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:35:04 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/07 16:57:18 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:31:38 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,28 @@ void	program_init(t_philosophy *program, t_philo *philo)
 	pthread_mutex_init(&program->dead_lock, NULL);
 }
 
-void	philos_init(t_philosophy *program, t_philo *philo, pthread_mutex_t *forks, char **av)
+void	philos_init(t_philosophy *program, t_philo *philo,
+		pthread_mutex_t *forks, char **av)
 {
 	int	i;
 
 	i = 0;
-    while (i < ft_atoi(av[1]))
-    {
-        philo[i].id = i + 1;
-        philo[i].eating = 0;
-        philo[i].meals_eaten = 0;
-        input_init(&philo[i], av);
-        philo[i].start_time = get_time();
-        philo[i].last_meal = get_time();
-        philo[i].dead_lock = &program->dead_lock;
+	while (i < ft_atoi(av[1]))
+	{
+		philo[i].id = i + 1;
+		philo[i].eating = 0;
+		philo[i].meals_eaten = 0;
+		input_init(&philo[i], av);
+		philo[i].start_time = get_time();
+		philo[i].last_meal = get_time();
+		philo[i].dead_lock = &program->dead_lock;
 		philo[i].meal_lock = &program->meal_lock;
-	    philo[i].write_lock = &program->write_lock;
-        philo[i].dead = &program->dead_flag;
+		philo[i].write_lock = &program->write_lock;
+		philo[i].dead = &program->dead_flag;
 		philo[i].left_fork = &forks[i];
-        // if (i == 0)
-		// 	philo[i].right_fork = &forks[ft_atoi(av[1]) - 1];
-		// else
-		// 	philo[i].right_fork = &forks[i - 1];
 		philo[i].right_fork = &forks[(i + 1) % ft_atoi(av[1])];
 		i++;
-    }
+	}
 }
 
 void	forks_init(pthread_mutex_t *forks, int philo_num)

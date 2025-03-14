@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:36:15 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/07 16:51:20 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:48:41 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@
 
 typedef struct s_philo
 {
-	pthread_t thread; // her filozofun kendi threadi
+	pthread_t		thread;
 	int				id;
-	int eating;       //şu an yiyor mu flagi
-	int meals_eaten;  // kaç kere ymeek yedi
-	int num_of_philo; //
+	int				eating;
+	int				meals_eaten;
+	int				num_of_philo;
 	int				num_to_eat;
-	int *dead;          // herhsngi biri ölürse diye ortak
-	size_t last_meal;   // son yediği zaman
-	size_t time_to_die; // bu kadar süre yemezse ölğr
+	int				*dead;
+	size_t			last_meal;
+	size_t			time_to_die;
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
 	size_t			start_time;
@@ -55,7 +55,7 @@ typedef struct s_philosphy
 int					ft_strlen(char *str);
 int					ft_atoi(const char *str);
 size_t				get_time(void);
-void					ft_usleep(size_t milliseconds);
+void				ft_usleep(size_t milliseconds);
 void				print_message(t_philo *philo, int id, char *message);
 
 // init

@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:38:49 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/07 17:01:24 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/02/10 14:16:35 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ static int	check_av(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	t_philosophy program;
-	t_philo philo[MAX_PHILO];
-	pthread_mutex_t forks[MAX_PHILO];
+	t_philosophy	program;
+	t_philo			philo[MAX_PHILO];
+	pthread_mutex_t	forks[MAX_PHILO];
 
 	if (ac != 5 && ac != 6)
 	{
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 	}
 	if (check_av(ac, av) != 0)
 		return (1);
-    program_init(&program, philo);
+	program_init(&program, philo);
 	forks_init(forks, ft_atoi(av[1]));
 	philos_init(&program, philo, forks, av);
 	mother_thread(&program, forks);
