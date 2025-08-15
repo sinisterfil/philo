@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:42:44 by hbayram           #+#    #+#             */
-/*   Updated: 2025/08/01 14:34:04 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/08/15 17:04:09 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,15 @@ void	*philosophers_dilemma(void *pointer)
 
 	philo = (t_philo *)pointer;
 	print_message(philo, philo->id, "is thinking");
-	if (philo->id % 2 == 0)
-		ft_usleep(1);
+	// if (philo->id % 2 == 0)
+	// 	ft_usleep(1);
+	if (philo->num_of_philo % 2 == 1) {
+        if (philo->id % 2 == 1)
+            ft_usleep(philo->time_to_eat / 2);
+    } else {
+        if (philo->id % 2 == 0)
+            ft_usleep(philo->time_to_eat / 2);
+    }
 	while (1)
 	{
 		if(philo->num_of_philo % 2 == 1)
