@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:36:15 by hbayram           #+#    #+#             */
-/*   Updated: 2025/02/12 12:48:41 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/08/17 13:47:07 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ typedef struct s_philosphy
 int					ft_strlen(char *str);
 int					ft_atoi(const char *str);
 size_t				get_time(void);
-void				ft_usleep(size_t milliseconds);
 void				print_message(t_philo *philo, int id, char *message);
+void				ft_usleep(size_t milliseconds);
 
 // init
+void				waiting(t_philo *philo);
 void				program_init(t_philosophy *program, t_philo *philo);
 void				forks_init(pthread_mutex_t *forks, int philo_num);
 void				philos_init(t_philosophy *program, t_philo *philo,
@@ -74,7 +75,8 @@ int					mother_thread(t_philosophy *program,
 // dilemma
 void				overthinking(t_philo *philo);
 void				dreaming(t_philo *philo);
-void				feasting(t_philo *philo);
+void				feasting_odd(t_philo *philo);
+void				feasting_even(t_philo *philo);
 
 // checkup
 int					full_belly(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:42:44 by hbayram           #+#    #+#             */
-/*   Updated: 2025/08/15 17:04:09 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/08/16 00:37:20 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,13 @@ void	terminator(t_philosophy *program, pthread_mutex_t *forks, char *arg)
 	}
 }
 
-void	feasting2(t_philo *philo)
+void	waiting(t_philo *philo)
 {
-	if(philo->id % 2 == 0)
+	if (philo->num_of_philo % 2 == 1)
 	{
-		pthread_mutex_lock(philo->left_fork);
-		print_message(philo, philo->id, "has taken a fork");
-		if (philo->num_of_philo == 1)
-		{
-			ft_usleep(philo->time_to_die);
-			pthread_mutex_unlock(philo->left_fork);
-			return ;
-		}
-		pthread_mutex_lock(philo->right_fork);
-		print_message(philo, philo->id, "has taken a fork");
+		if (philo->id % 2 == 1)
+			ft_usleep(philo->time_to_eat / 2);
 	}
-	else 
-	{
-		pthread_mutex_lock(philo->right_fork);
-		print_message(philo, philo->id, "has taken a fork");
-		if (philo->num_of_philo == 1)
-		{
-			ft_usleep(philo->time_to_die);
-			pthread_mutex_unlock(philo->right_fork);
-			return ;
-		}
-		pthread_mutex_lock(philo->left_fork);
-		print_message(philo, philo->id, "has taken a fork");
-	}
-	pthread_mutex_lock(philo->meal_lock);
-	philo->eating = 1;
-	philo->last_meal = get_time();
-	print_message(philo, philo->id, "is eating");
-	philo->meals_eaten++;
-	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep(philo->time_to_eat);
-	philo->eating = 0;
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
 }
 
 void	*philosophers_dilemma(void *pointer)
@@ -78,21 +47,13 @@ void	*philosophers_dilemma(void *pointer)
 
 	philo = (t_philo *)pointer;
 	print_message(philo, philo->id, "is thinking");
-	// if (philo->id % 2 == 0)
-	// 	ft_usleep(1);
-	if (philo->num_of_philo % 2 == 1) {
-        if (philo->id % 2 == 1)
-            ft_usleep(philo->time_to_eat / 2);
-    } else {
-        if (philo->id % 2 == 0)
-            ft_usleep(philo->time_to_eat / 2);
-    }
+	waiting(philo);
 	while (1)
 	{
-		if(philo->num_of_philo % 2 == 1)
-			feasting(philo);
+		if (philo->num_of_philo % 2 == 1)
+			feasting_odd(philo);
 		else
-			feasting2(philo);
+			feasting_even(philo);
 		dreaming(philo);
 		overthinking(philo);
 		pthread_mutex_lock(philo->dead_lock);
