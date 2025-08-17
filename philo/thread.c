@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 03:42:44 by hbayram           #+#    #+#             */
-/*   Updated: 2025/08/16 00:37:20 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/08/17 17:10:09 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	waiting(t_philo *philo)
 	if (philo->num_of_philo % 2 == 1)
 	{
 		if (philo->id % 2 == 1)
-			ft_usleep(philo->time_to_eat / 2);
+			ft_usleep(philo, philo->time_to_eat / 2);
 	}
 }
 
@@ -80,10 +80,7 @@ int	mother_thread(t_philosophy *program, pthread_mutex_t *forks)
 	{
 		if (pthread_create(&program->philo[i].thread, NULL,
 				&philosophers_dilemma, &program->philo[i]) != 0)
-		{
 			terminator(program, forks, "Thread creation error");
-			return (1);
-		}
 		i++;
 	}
 	i = -1;
@@ -92,6 +89,7 @@ int	mother_thread(t_philosophy *program, pthread_mutex_t *forks)
 		if (pthread_join(program->philo[i].thread, NULL) != 0)
 			terminator(program, forks, "Thread join error");
 	}
-	pthread_join(monitor, NULL);
+	if (pthread_join(monitor, NULL) != 0)
+		terminator(program, forks, "Thread join error");
 	return (0);
 }

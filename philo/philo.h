@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:36:15 by hbayram           #+#    #+#             */
-/*   Updated: 2025/08/17 13:47:07 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/08/17 17:08:17 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int					ft_strlen(char *str);
 int					ft_atoi(const char *str);
 size_t				get_time(void);
 void				print_message(t_philo *philo, int id, char *message);
-void				ft_usleep(size_t milliseconds);
+void				ft_usleep(t_philo *philo, size_t milliseconds);
 
 // init
 void				waiting(t_philo *philo);

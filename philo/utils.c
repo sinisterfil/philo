@@ -6,7 +6,7 @@
 /*   By: hbayram <hbayram@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 22:40:01 by hbayram           #+#    #+#             */
-/*   Updated: 2025/08/15 18:37:29 by hbayram          ###   ########.fr       */
+/*   Updated: 2025/08/17 17:15:08 by hbayram          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,20 @@ size_t	get_time(void)
 	return (current_time);
 }
 
-void	ft_usleep(size_t milliseconds)
+void	ft_usleep(t_philo *philo, size_t milliseconds)
 {
 	size_t	current;
 
 	current = get_time();
 	while ((get_time() - current) < milliseconds)
+	{
+		pthread_mutex_lock(philo[0].dead_lock);
+        if (*philo->dead)
+        {
+            pthread_mutex_unlock(philo[0].dead_lock);
+            break;
+        }
+        pthread_mutex_unlock(philo[0].dead_lock);
 		usleep(500);
+	}
 }
